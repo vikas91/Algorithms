@@ -7,7 +7,7 @@ package javaAlgorithms.UnionFind;
  */
 public class QuickFind implements UnionFind{
 	
-	protected int[] inputArray;
+	public int[] inputArray;
 	
 	public QuickFind(int N){
 		inputArray = new int[N];
@@ -20,7 +20,7 @@ public class QuickFind implements UnionFind{
 		if(!isconnected(p,q)){
 			int p_value = inputArray[p];
 			int q_value = inputArray[q];
-			for(int i: inputArray){
+			for(int i=0; i<inputArray.length; i++){
 				if(inputArray[i]==p_value){
 					inputArray[i]=q_value;
 				}
@@ -31,3 +31,4 @@ public class QuickFind implements UnionFind{
 		return inputArray[p]==inputArray[q];
 	}
 }
+

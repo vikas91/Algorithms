@@ -1,37 +1,30 @@
 package javaAlgorithms.UnionFind;
 /* This algorithm reduces the problem with QU which gives long trees 
  * When connecting 2 nodes we always make larger node root of smaller node
- * This implementation we create a root object and get size of root node every time
- * However we don't need to create an extra array for keeping track of soxe of each node.
+ * This implementation we create an extra array to maintain size of root of nodes
+ * Size is appropriate node is updated whenever we create a union of two nodes
  */
+
 public class WeightedQuickUnion extends QuickUnion {
+	protected int[] sizeArray;
 	
 	public WeightedQuickUnion(int N){
 		super(N);
-	}
-	class Root{
-		int root_length, root_value;
-		Root(int root_length, int root_value){
-			this.root_length=root_length;
-			this.root_value=root_value;
+		sizeArray = new int[N];
+		for(int i=0; i<sizeArray.length; i++){
+			sizeArray[i]=1;
 		}
 	}
-	protected Root get_root_obj(int p){
-		int root_length=1;
-		while(inputArray[p]!=p){
-			p=inputArray[p];
-			root_length++;
-		}
-		Root root_obj = new Root(root_length, p);
-		return root_obj;
-	}
+	
 	public void union(int p, int q){
-		Root p_root_obj = get_root_obj(p);
-		Root q_root_obj = get_root_obj(q);
-		if (p_root_obj.root_length<q_root_obj.root_length){
-			inputArray[p_root_obj.root_value] = q_root_obj.root_value;
+		int p_root = get_root(p);
+		int q_root = get_root(q);
+		if (sizeArray[p_root]<sizeArray[q_root]){
+			inputArray[p_root] = q_root;
+			sizeArray[q_root] += sizeArray[p_root];
 		}else{
-			inputArray[q_root_obj.root_value] = p_root_obj.root_value;
+			inputArray[q_root] = p_root;
+			sizeArray[p_root] +=sizeArray[q_root];
 		}
 		
 	}
