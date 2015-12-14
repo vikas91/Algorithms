@@ -8,14 +8,14 @@ public class LLStack<Item> implements Stack<Item> {
 		Item item;
 		Node next;
 	}
-	
+	// Add item at begining of LL
 	public void push(Item input){
 		Node oldfirst = first;
 		Node first = new Node();
 		first.item = input;
 		first.next = oldfirst;
 	}
-	
+	// Remove item from begining of LL
 	public Item pop(){
 		if(!isEmpty()){
 			Node oldfirst = first;

@@ -24,6 +24,7 @@ public class ArrayStack<Item> implements Stack<Item> {
 	public Item pop() throws RuntimeException{
 		if(isEmpty()){
 			System.out.print("Stack is Empty");
+			throw new RuntimeException("Stack is Empty");
 		}
 		Item value = privateArray[currentarrayIndex];
 		privateArray[currentarrayIndex]=null;
