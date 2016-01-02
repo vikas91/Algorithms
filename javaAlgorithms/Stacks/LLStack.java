@@ -1,8 +1,31 @@
 package javaAlgorithms.Stacks;
 
+import java.util.Iterator;
+
 public class LLStack<Item> implements Stack<Item> {
 	
 	private Node first = null;
+	
+	public LLIterator iterator(){
+		return new LLIterator();
+	}
+	
+	class LLIterator implements Iterator<Item>{
+		
+		private Node current = null;
+		
+		public boolean hasNext(){
+			return current==null;
+		}
+		public void remove(){
+			
+		}
+		public Item next(){
+			Item item = current.item;
+			current = current.next;
+			return item;
+		}
+	}
 	
 	private class Node{
 		Item item;
@@ -11,7 +34,7 @@ public class LLStack<Item> implements Stack<Item> {
 	// Add item at begining of LL
 	public void push(Item input){
 		Node oldfirst = first;
-		Node first = new Node();
+		first = new Node();
 		first.item = input;
 		first.next = oldfirst;
 	}
