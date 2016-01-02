@@ -1,13 +1,18 @@
 package javaAlgorithms.LinkedLists;
 
 public class SingleLinkedLists<Item> {
-	private int length;
-	private Node root=null;
-	private class Node {
+	protected int length;
+	protected Node root=null;
+	public class Node {
 		Item item;
 		Node next;
 	}
 	public SingleLinkedLists(){
+	}
+	
+	public Node getRoot(){
+		return root;
+		
 	}
 	
 	// Adds item at beginning of linked list.
@@ -122,6 +127,18 @@ public class SingleLinkedLists<Item> {
 			tempNode=tempNode.next;
 		}
 	}
+	// This will return item from linked list
+	public Item get(Item input){
+		Node tempNode = root;
+		while(tempNode!=null){
+			if(tempNode.item==input){
+				return tempNode.item; 
+			}
+			tempNode=tempNode.next;
+		}
+		System.out.println("Item doesnt exist in Linked List");
+		return null;
+	}
 	
 	// This will return length of linked list
 	public int length(){
@@ -129,10 +146,12 @@ public class SingleLinkedLists<Item> {
 	}
 	
 	public static void main(String args[]){
-		SingleLinkedLists<Integer> mylinkedlist = new SingleLinkedLists<Integer>();
+		LinkedListProblems<Integer> mylinkedlist = new LinkedListProblems<Integer>();
 		for(int i=0;i<10; i++){
 			mylinkedlist.add(i);
 		}
+		mylinkedlist.printNodes();
+		mylinkedlist.reverseLinkedlist();
 		mylinkedlist.printNodes();
 	}
 }
