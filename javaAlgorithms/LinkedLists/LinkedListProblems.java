@@ -68,6 +68,7 @@ public class LinkedListProblems<Item> extends SingleLinkedLists<Item> {
 		return count;
 	}
 	
+	// This will reverse a given linked list
 	public void reverseLinkedlist(){
 		Node tempNode=root;
 		Node returnRoot=null;
@@ -80,5 +81,19 @@ public class LinkedListProblems<Item> extends SingleLinkedLists<Item> {
 		}
 		root=returnRoot;
 	}
+	
+	// This will delete duplicates from sorted Linked list
+	public Node deleteDuplicates(Node head) {
+        Node tempNode=head;
+        while(tempNode!=null){
+            Node nextNode=tempNode.next;
+            while(nextNode!=null && tempNode.item==nextNode.item){
+                nextNode=nextNode.next;
+            }
+            tempNode.next=nextNode;
+            tempNode=tempNode.next;
+        }
+        return head;
+    }
 	
 }
