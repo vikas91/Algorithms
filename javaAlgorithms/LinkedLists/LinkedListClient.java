@@ -9,8 +9,10 @@ public class LinkedListClient {
 		for(int i=0;i<10; i++){
 			mylinkedlist.add(i,i);
 		}
-		System.out.println(Arrays.deepToString(mylinkedlist.printNodesAsArrayList()));
-		System.out.println(mylinkedlist.findMid().getItem());
+		mylinkedlist.printNodes();
+		System.out.println();
+		
+		
 //		mylinkedlist.reverseLinkedlist();
 //		mylinkedlist.printNodes();
 	}

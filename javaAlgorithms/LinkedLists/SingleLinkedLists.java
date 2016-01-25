@@ -10,12 +10,10 @@ public class SingleLinkedLists<Item> {
 	
 	public ListNode getRoot(){
 		return root;
-		
 	}
 	
 	public void setRoot(ListNode node){
 		this.root = node;
-		
 	}
 	
 	// Adds item at beginning of linked list.
@@ -205,6 +203,19 @@ public class SingleLinkedLists<Item> {
 			tempNode = tempNode.getNext();
 		}
 		root=returnRoot;
+	}
+	
+	// This will reverse the current linked list
+	private void printNodesReverseRecursionInternal(ListNode head){
+		if (head.getNext()!=null){
+			printNodesReverseRecursionInternal(head.getNext());
+		}
+		System.out.print(head.getItem());
+	}
+	
+	public void printNodesReverseRecursion(){
+		ListNode tempNode=root;
+		printNodesReverseRecursionInternal(tempNode);
 	}
 	
 	// This will return length of linked list
