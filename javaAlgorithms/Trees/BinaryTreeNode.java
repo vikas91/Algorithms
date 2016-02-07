@@ -9,6 +9,7 @@ public class BinaryTreeNode<Item> {
 		this.left = null;
 		this.right = null;
 	}
+	
 	public Item getItem(){
 		return this.item;
 	}

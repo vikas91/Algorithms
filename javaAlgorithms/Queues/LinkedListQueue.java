@@ -21,4 +21,7 @@ public class LinkedListQueue<Item> implements Queue<Item> {
 		Item item = (Item)linkedlist.getRoot().getItem();
 		return item;
 	}
+	public void printNodes(){
+		linkedlist.printNodes();
+	}
 }

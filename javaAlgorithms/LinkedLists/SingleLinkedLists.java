@@ -5,11 +5,12 @@ public class SingleLinkedLists<Item> {
 	protected ListNode root;
 	
 	public SingleLinkedLists(){
-		
+		this.root=null;
+		this.length=0;
 	}
 	
 	public ListNode getRoot(){
-		return root;
+		return this.root;
 	}
 	
 	public void setRoot(ListNode node){
@@ -22,18 +23,17 @@ public class SingleLinkedLists<Item> {
 		// Check if memory exists here and only then create a node
 		ListNode newNode = new ListNode(input);
 		
-		if(root==null){
-			System.out.println("Adding into empty Linked list");
+		if(this.root==null){
 			newNode.setNext(null);
 			setRoot(newNode);
-			length = length + 1;
+			this.length = this.length + 1;
 			return;
 		}
 		
 		ListNode tempNode = root;
 		newNode.setNext(tempNode);
-		root=newNode;
-		length=length + 1;
+		this.root=newNode;
+		this.length=this.length + 1;
 	}
 	
 	// Adds item at end of linked list.
@@ -41,34 +41,33 @@ public class SingleLinkedLists<Item> {
 	public void addAtEnd(Item input){
 		ListNode newNode = new ListNode(input);
 		
-		if(root==null){
-			System.out.println("Adding into empty Linked list");
+		if(this.root==null){
 			newNode.setNext(null);
 			setRoot(newNode);
-			length = length + 1;
+			this.length = this.length + 1;
 			return;
 		}
 		
-		ListNode tempNode = root;
+		ListNode tempNode = this.root;
 		while(tempNode.getNext()!=null){
 			tempNode = tempNode.getNext();
 		}
 		tempNode.setNext(newNode);
-		length = length + 1;
+		this.length = this.length + 1;
 	}
 	
 	
 	//Removes item from beginning of linked list.
 	//Time complexity O(1)
 	public Item deleteFromBegining(){
-		if(root==null || length==0){
+		if(this.root==null || length==0){
 			System.out.println("Linked List is Empty.Nothing to delete");
 			throw new IndexOutOfBoundsException();
 		}
-		ListNode tempNode = root;
+		ListNode tempNode = this.root;
 		
-		root = tempNode.getNext();
-		length = length-1;
+		this.root = tempNode.getNext();
+		this.length = this.length-1;
 		Item item = (Item) tempNode.getItem();
 		return item;
 	}
@@ -77,12 +76,12 @@ public class SingleLinkedLists<Item> {
 	//Removes item from beginning of linked list.
 	//Time complexity O(N)
 	public Item deleteFromEnd(){
-		if(root==null || length==0){
+		if(this.root==null || length==0){
 			System.out.println("Linked List is Empty.Nothing to delete");
 			throw new IndexOutOfBoundsException();
 		}
 		
-		ListNode tempNode=root;
+		ListNode tempNode=this.root;
 		ListNode currentNode=null;
 		while(tempNode.getNext()!=null){
 			currentNode=tempNode;
@@ -92,10 +91,10 @@ public class SingleLinkedLists<Item> {
 		if(currentNode!=null){
 			currentNode.setNext(null);
 		}else{
-			root=null;
+			this.root=null;
 		}
 		
-		length = length-1;
+		this.length = this.length-1;
 		return item;
 	}
 	
@@ -109,71 +108,68 @@ public class SingleLinkedLists<Item> {
 			throw new IndexOutOfBoundsException();
 		}
 		// Add item at beginning of empty linked list
-		if(root==null){
-			System.out.println("Adding node at begining of empty linked list");
+		if(this.root==null){
 			newNode.setNext(null);
-			root = newNode;
-			length = length + 1;
+			this.root = newNode;
+			this.length = this.length + 1;
 			return;
 		}
 		// Add item at beginning of non empty linked list
 		if(index==0){
-			System.out.println("Adding node at begining of non empty linked list");
-			ListNode tempNode = root;
-			root = newNode;
-			root.setNext(tempNode);
-			length = length + 1;
+			ListNode tempNode = this.root;
+			this.root = newNode;
+			this.root.setNext(tempNode);
+			this.length = this.length + 1;
 		}
 		// Add item in middle of linked list
 		else{
-			ListNode currentNode = root;
+			ListNode currentNode = this.root;
 			for(int i=1; i<index; i++){
 				currentNode = currentNode.getNext();
 			}
 			ListNode tempNode = currentNode.getNext();
 			currentNode.setNext(newNode);
 			newNode.setNext(tempNode);
-			length = length+1;
+			this.length = this.length+1;
 		}
 	}
 	
 	// Adds item at given index of linked list
 	public Item delete(int index){
 		
-		if(index>length || index<0){
+		if(index>this.length || index<0){
 			System.out.println("Cant delete node at the given index");
 			throw new IndexOutOfBoundsException();
 		}
 		// Add item at beginning of empty linked list
-		if(root==null){
+		if(this.root==null){
 			System.out.println("Cannot delete node from empty linked list");
 			return null;
 		}
 		// Delete item at beginning of non empty linked list
 		if(index==0){
-			System.out.println("Delete node at begining of non empty linked list");
 			ListNode tempNode = root;
-			root=tempNode.getNext();
-			length = length - 1;
+			this.root=tempNode.getNext();
+			this.length = this.length - 1;
 			Item item = (Item) tempNode.getItem();
 			return item;
 		}
 		// Add item in middle and end of linked list
 		else{
-			ListNode currentNode = root;
+			ListNode currentNode = this.root;
 			for(int i=1; i<index; i++){
 				currentNode = currentNode.getNext();
 			}
 			ListNode tempNode = currentNode.getNext();
 			currentNode.setNext(tempNode.getNext());
-			length = length-1;
+			this.length = this.length-1;
 			Item item = (Item) tempNode.getItem();
 			return item;
 		}
 	}
 	// print all nodes of linked list
 	public void printNodes(){
-		ListNode tempNode = root;
+		ListNode tempNode = this.root;
 		while(tempNode!=null){
 			System.out.print(tempNode.getItem());
 			tempNode=tempNode.getNext();
@@ -181,7 +177,7 @@ public class SingleLinkedLists<Item> {
 	}
 	// This will return item from linked list if it exists 
 	public boolean find(Item input){
-		ListNode tempNode = root;
+		ListNode tempNode = this.root;
 		while(tempNode!=null){
 			if(tempNode.getItem()==input){
 				return true; 
@@ -192,9 +188,21 @@ public class SingleLinkedLists<Item> {
 		return false;
 	}
 	
+	public Item getItem(int index){
+		if(index>=this.length){
+			throw new IndexOutOfBoundsException();
+		}
+		ListNode tempNode = this.root;
+		for(int i=0;i<index;i++){
+			tempNode=tempNode.getNext();
+		}
+		Item item = (Item) tempNode.getItem();
+		return item;
+	}
+	
 	// This will reverse the current linked list
 	public void reverseLinkedlist(){
-		ListNode tempNode=root;
+		ListNode tempNode=this.root;
 		ListNode returnRoot=null;
 		while(tempNode!=null){
 			ListNode currentNode = new ListNode(tempNode.getItem());
@@ -202,7 +210,7 @@ public class SingleLinkedLists<Item> {
 			returnRoot = currentNode; 
 			tempNode = tempNode.getNext();
 		}
-		root=returnRoot;
+		this.root=returnRoot;
 	}
 	
 	// This will reverse the current linked list
@@ -214,19 +222,19 @@ public class SingleLinkedLists<Item> {
 	}
 	
 	public void printNodesReverseRecursion(){
-		ListNode tempNode=root;
+		ListNode tempNode=this.root;
 		printNodesReverseRecursionInternal(tempNode);
 	}
 	
 	// This will return length of linked list
 	public int length(){
-		return length;
+		return this.length;
 	}
 	
 	// This will return Linked List nodes as Array List
 	public Item[] printNodesAsArrayList(){
 		Item[] resultArray = (Item[]) new Object[length()];
-		ListNode tempNode = root;
+		ListNode tempNode = this.root;
 		int arrayindex=0;
 		while(tempNode!=null){
 			resultArray[arrayindex] = (Item) tempNode.getItem();
@@ -244,13 +252,13 @@ public class SingleLinkedLists<Item> {
     private ListNode slowPointer=null;
     
 	public boolean findIfLoopExists(){
-		if(root==null){
+		if(this.root==null){
 			System.out.println("Linked List is empty");
 			return false;
 		}
 		
-		fastPointer = root;
-		slowPointer = root;
+		fastPointer = this.root;
+		slowPointer = this.root;
 		
 		while(fastPointer.getNext()!=null || fastPointer!=null){
 			fastPointer = fastPointer.getNext().getNext();
@@ -287,7 +295,7 @@ public class SingleLinkedLists<Item> {
 	public void deleteDuplicates() {
 		
 		// Check if linked list is sorted first here
-		ListNode tempNode=root;
+		ListNode tempNode=this.root;
         while(tempNode!=null){
         	ListNode nextNode=tempNode.getNext();
             while(nextNode!=null && tempNode.getItem()==nextNode.getItem()){
@@ -303,18 +311,18 @@ public class SingleLinkedLists<Item> {
 	// return second pointer
 	public Item findNthNodeFromEnd(int n){
 		ListNode firstTempNode, secondTempNode;
-		if(root==null){
+		if(this.root==null){
 			System.out.println("Linked List is empty");
 			throw new IndexOutOfBoundsException();
 		}
 		// Here we know the length of linked list
 		// However handle the exception while iterating firstTempNode
-		if(n>length){
+		if(n>this.length){
 			System.out.println("Linked List size is less than given index");
 			throw new IndexOutOfBoundsException();
 		}
 		
-		firstTempNode = secondTempNode = root;
+		firstTempNode = secondTempNode = this.root;
 		
 		for(int i=1; i<n; i++){
 			if(firstTempNode==null){

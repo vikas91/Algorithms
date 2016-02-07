@@ -1,5 +1,6 @@
 package javaAlgorithms.Stacks;
 
+import javaAlgorithms.LinkedLists.ListNode;
 import javaAlgorithms.LinkedLists.SingleLinkedLists;
 
 public class LinkedListStack<Item> implements Stack<Item> {
@@ -21,8 +22,15 @@ public class LinkedListStack<Item> implements Stack<Item> {
 	}
 	
 	public Item topofStack(){
-		Item item = (Item)linkedlist.getRoot().getItem();
-		return item;
+		return (Item)linkedlist.getRoot().getItem();
+	}
+	
+	public Item getItem(int index){
+		return linkedlist.getItem(index);
+	}
+	
+	public int getLength(){
+		return linkedlist.length();
 	}
 
 }

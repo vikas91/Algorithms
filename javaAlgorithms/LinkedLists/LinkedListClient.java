@@ -1,7 +1,5 @@
 package javaAlgorithms.LinkedLists;
 
-import java.util.Arrays;
-
 public class LinkedListClient {
 	
 	public static void main(String args[]){
