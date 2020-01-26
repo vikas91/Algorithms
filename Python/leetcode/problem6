@@ -1,0 +1,70 @@
+"""
+Problem 6. ZigZag Conversion
+Medium
+
+1358
+
+4003
+
+Add to List
+
+Share
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+
+Write the code that will take a string and make this conversion given a number of rows:
+
+string convert(string s, int numRows);
+Example 1:
+
+Input: s = "PAYPALISHIRING", numRows = 3
+Output: "PAHNAPLSIIGYIR"
+Example 2:
+
+Input: s = "PAYPALISHIRING", numRows = 4
+Output: "PINALSIGYAHRPI"
+Explanation:
+
+P     I    N
+A   L S  I G
+Y A   H R
+P     I
+
+"""
+
+"""
+Approach:
+1. This is a mathematical iteration problem so observing the pattern is crucial
+2. We iterate through the number of rows and increment the index by 2*(numRows-1) for this loop
+3. For each row we append the char at index and in between char in the zigzag pattern  
+4. For the first and last rows there is no intermediate char we need to append
+5. For the other rows we need to add char which is 2*(numRows-i-1) from the current char
+6. perform join on the output array to create a string. Do not create string in every iteration
+
+Time Complexity : O(n)
+Space Compelxity: O(n)
+"""
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1:
+            return s
+        start = None
+        output = ""
+        for i in range(numRows):
+            start = i
+            while(start<len(s)):
+                if i==0 or i == numRows-1:
+                    output += s[start]
+                else:
+                    output += s[start]
+                    if start + 2*(numRows-i-1)<len(s):
+                        output += s[start + 2*(numRows-i-1)]
+                    
+                        
+                start += 2*(numRows-1)
+                
+        return output
