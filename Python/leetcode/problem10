@@ -1,0 +1,86 @@
+"""
+Problme10: Regular Expression Matching
+Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
+
+'.' Matches any single character.
+'*' Matches zero or more of the preceding element.
+The matching should cover the entire input string (not partial).
+
+Note:
+
+s could be empty and contains only lowercase letters a-z.
+p could be empty and contains only lowercase letters a-z, and characters like . or *.
+Example 1:
+
+Input:
+s = "aa"
+p = "a"
+Output: false
+Explanation: "a" does not match the entire string "aa".
+Example 2:
+
+Input:
+s = "aa"
+p = "a*"
+Output: true
+Explanation: '*' means zero or more of the preceding element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
+Example 3:
+
+Input:
+s = "ab"
+p = ".*"
+Output: true
+Explanation: ".*" means "zero or more (*) of any character (.)".
+Example 4:
+
+Input:
+s = "aab"
+p = "c*a*b"
+Output: true
+Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore, it matches "aab".
+Example 5:
+
+Input:
+s = "mississippi"
+p = "mis*is*p*."
+Output: false
+"""
+
+"""
+Approach:
+1. We use dynamic programming to check for sub strings that match the substring pattern provided
+2. We need to check if substring starting at ith index in string matches substring matching jth index in pattern
+3. match(s[i:], p[j:]) is true iff it satisfies one of three conditions
+    a. if p[j+1] == "*" and match(s[i:], p[j+2:]) // This is for 0th occurance of char matching 
+    b. if p[j+1] == "*" and p[j] in [s[i], .] and match(s[i+1:], p[j:]]) // this is for one or more occurance of char matching
+    c. if p[j] in [s[i], .] and match(s[i+1:], p[j+1:])
+
+If m,n are lengths of s,p respectively
+Time Complexity: O(m*n)
+Space Complexity:O(m*n)
+"""
+
+class Solution:
+    def isMatchHelper(self, s, p, i, j, dp):
+        if (i, j) not in dp:
+            if j == len(p):
+                dp[(i,j)] = i == len(s)
+            else:
+                flag_bool = i<len(s) and p[j] in [s[i], "."] 
+                
+                if j+1 < len(p) and p[j+1] == "*":
+                    dp[(i,j)] = self.isMatchHelper(s,p,i,j+2, dp) or flag_bool and self.isMatchHelper(s,p,i+1,j, dp)
+                else:
+                    dp[(i,j)] = flag_bool and self.isMatchHelper(s,p,i+1,j+1, dp)
+                
+        return dp[(i,j)]
+    
+    def isMatch(self, s: str, p: str) -> bool:
+        dp = {}
+        return self.isMatchHelper(s, p, 0, 0, dp)
+        
+        
+        
+        
+
+
